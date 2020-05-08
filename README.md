@@ -1,8 +1,6 @@
 # GroupVault
 > A team-based password manager with RBAC and a REST API
 
-
-
 ## Installation
 
 GroupVault will be distributed as a Docker container upon release. Once that happens, we'll provide instructions here 
