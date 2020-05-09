@@ -15,7 +15,8 @@ def generate_iv_value():
 class Folder(models.Model):
     """Represents a folder containing other folders and entries."""
     name = models.CharField(max_length=255)
-    parent = models.ForeignKey('self', null=True, default=None, related_name='sub_folders', on_delete=models.SET_NULL)
+    parent = models.ForeignKey('self', null=True, blank=True, default=None,
+                               related_name='sub_folders', on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.name
