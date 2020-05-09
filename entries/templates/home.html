@@ -1,6 +1,10 @@
 {% extends "_base.html" %}
 {% load tree_list %}
 
+{% block extrahead %}
+
+{% endblock %}
+
 {% block extrabody %}class="hold-transition sidebar-mini layout-fixed"{% endblock %}
 
 {% block body %}
@@ -33,7 +37,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-3">
+            <div id="folderList" class="col-sm-3">
                 {% autoescape off %}
                 {{ folders | tree_list }}
                 {% endautoescape %}
@@ -43,5 +47,9 @@
             </div>
         </div>
     </div>
+
+{% endblock %}
+
+{% block extrascripts %}
 
 {% endblock %}
