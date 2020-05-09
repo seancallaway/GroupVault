@@ -2,7 +2,15 @@
 {% load tree_list %}
 
 {% block extrahead %}
-
+    <style>
+        ul, #folderList {
+            list-style-type: none;
+        }
+        #folderList {
+          margin: 0;
+          padding: 0;
+        }
+    </style>
 {% endblock %}
 
 {% block extrabody %}class="hold-transition sidebar-mini layout-fixed"{% endblock %}
