@@ -1,3 +1,12 @@
 from django.contrib import admin
+from entries.models import Folder
 
-# Register your models here.
+
+class FolderAdmin(admin.ModelAdmin):
+    fields = [
+        'name',
+        'parent',
+    ]
+
+
+admin.site.register(Folder, FolderAdmin)
