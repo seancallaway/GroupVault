@@ -1,4 +1,17 @@
 {% extends "_base.html" %}
+{% load tree_list %}
+
+{% block extrahead %}
+    <style>
+        ul, #folderList {
+            list-style-type: none;
+        }
+        #folderList {
+          margin: 0;
+          padding: 0;
+        }
+    </style>
+{% endblock %}
 
 {% block extrabody %}class="hold-transition sidebar-mini layout-fixed"{% endblock %}
 
@@ -32,13 +45,19 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-3">
-                <p>Future Home of the Folder List</p>
+            <div id="folderList" class="col-sm-3">
+                {% autoescape off %}
+                {{ folders | tree_list }}
+                {% endautoescape %}
             </div>
             <div class="col-sm-9">
                 <p>Future Home of the Entries List</p>
             </div>
         </div>
     </div>
+
+{% endblock %}
+
+{% block extrascripts %}
 
 {% endblock %}
