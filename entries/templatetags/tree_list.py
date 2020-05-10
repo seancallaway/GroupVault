@@ -7,9 +7,9 @@ def build_limb(folders):
     output = ''
     for folder in folders:
         if not folder.sub_folders.all():
-            output += f'<li><i class="far fa-folder"></i> <a href="#">{folder.name}</a></li>\n'
+            output += f'<li><i class="far fa-folder"></i> <a href="#" onClick="loadEntries({folder.id})">{folder.name}</a></li>\n'
         else:
-            output += f'<li><i class="far fa-folder"></i> <a href="#">{folder.name}</a>\n<ul>\n'
+            output += f'<li><i class="far fa-folder"></i> <a href="#" onClick="loadEntries({folder.id})">{folder.name}</a>\n<ul>\n'
             output += build_limb(folder.sub_folders.all())
             output += '</ul>\n</li>\n'
 
