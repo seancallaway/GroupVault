@@ -3,8 +3,18 @@
 
 ## Installation
 
-GroupVault will be distributed as a Docker container upon release. Once that happens, we'll provide instructions here 
-on how to configure and run it.
+GroupVault will be distributed as a Docker container upon release.
+
+The following environment variables should be passed to the container at runtime:
+
+* `SECRET_KEY` - a 50 character string that must stay the same between deployments
+* `DJANGO_ALLOWED_HOSTS` - a space-delimited list of allowed hosts, such as "groupvault groupvault.mydomain.com"
+* `SQL_ENGINE` - the Django DB engine to use, such as "django.db.backends.postgresql"
+* `SQL_DATABASE` - the name of the database to which to connect
+* `SQL_USER` - the name of the user with permissions to the database
+* `SQL_PASSWORD` - the password of the user with permissions to the database
+* `SQL_HOST` - the host running the database
+* `SQL_PORT` - the port on which the database server is listening (default: 5432)
 
 ## Development Setup
 
