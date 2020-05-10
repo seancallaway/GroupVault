@@ -34,5 +34,8 @@ class EntryDetailAjax(LoginRequiredMixin, View):
     def get(self, request, pk):
         entry = get_object_or_404(Entry, pk=pk)
         data = dict()
-        data['entry'] = model_to_dict(entry)
+        context = {'entry': entry}
+        data['entry'] = render_to_string('ajax/entry_modal.html',
+                                         context,
+                                         request=request)
         return JsonResponse(data)
