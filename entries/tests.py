@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import resolve
 from entries.models import Entry, Folder
-from entries.views import HomePage
+from entries.views import EntryListAjax, HomePage
 from users.models import CustomUser
 
 
@@ -25,6 +25,28 @@ class HomePageTest(TestCase):
         self.client.login(username='testuser', password='testpass')
         response = self.client.get('/')
         self.assertContains(response, BOOTSTRAP_VERSION)
+
+
+class AJAXViewTest(TestCase):
+
+    def setUp(self):
+        CustomUser.objects.create_user(username='testuser', email='test@fake.com', password='testpass')
+        self.folder = Folder.objects.create(name='Root')
+        self.item1 = Entry.objects.create(name='Test 1', folder=self.folder, secret='SuperSecret')
+        self.item2 = Entry.objects.create(name='Test 2', folder=self.folder, secret='ExtraSecret')
+
+    def test_url_resolves_to_folder_view(self):
+        found = resolve('/ajax/folder/1')
+        self.assertEqual(found.func.view_class, EntryListAjax)
+
+    def test_entry_list_requires_login(self):
+        response = self.client.get('/ajax/folder/1')
+        self.assertEqual(response.status_code, 302)
+
+    def test_entry_list_returns_list_group(self):
+        self.client.login(username='testuser', password='testpass')
+        response = self.client.get('/ajax/folder/1')
+        self.assertContains(response, 'list-group')
 
 
 class FolderTest(TestCase):

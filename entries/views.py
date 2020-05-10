@@ -17,7 +17,9 @@ class HomePage(LoginRequiredMixin, ListView):
         return Folder.objects.filter(parent=None)
 
 
-class EntryListAjax(View):
+class EntryListAjax(LoginRequiredMixin, View):
+    """Ajax view to display list of entries in the folder specified by PK."""
+
     def get(self, request, pk):
         entries = Folder.objects.get(id=pk).entries.all()
         data = dict()
@@ -28,7 +30,7 @@ class EntryListAjax(View):
         return JsonResponse(data)
 
 
-class EntryDetailAjax(View):
+class EntryDetailAjax(LoginRequiredMixin, View):
     def get(self, request, pk):
         entry = get_object_or_404(Entry, pk=pk)
         data = dict()
