@@ -1,6 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
-from entries.models import Folder
+from django.forms.models import model_to_dict
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.views.generic import ListView, View
+from entries.models import Entry, Folder
 
 
 class HomePage(LoginRequiredMixin, ListView):
@@ -11,3 +14,19 @@ class HomePage(LoginRequiredMixin, ListView):
     def get_queryset(self):
         """Eventually, this will be limited by permissions."""
         return Folder.objects.filter(parent=None)
+
+
+class EntryListAjax(View):
+    def get(self, request, pk):
+        entries = Folder.objects.get(id=pk).entries.all()
+        data = dict()
+        data['entries'] = entries
+        return JsonResponse(data)
+
+
+class EntryDetailAjax(View):
+    def get(self, request, pk):
+        entry = get_object_or_404(Entry, pk=pk)
+        data = dict()
+        data['entry'] = model_to_dict(entry)
+        return JsonResponse(data)
