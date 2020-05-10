@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.template.loader import render_to_string
 from django.views.generic import ListView, View
 from entries.models import Entry, Folder
 
@@ -20,7 +21,10 @@ class EntryListAjax(View):
     def get(self, request, pk):
         entries = Folder.objects.get(id=pk).entries.all()
         data = dict()
-        data['entries'] = entries
+        context = {'entries': entries}
+        data['entry_list'] = render_to_string('ajax/entry_list.html',
+                                              context,
+                                              request=request)
         return JsonResponse(data)
 
 
