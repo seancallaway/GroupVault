@@ -56,6 +56,37 @@
         </div>
     </div>
 
+    <div class="modal fade" id="entryModal" tabindex="-1" role="dialog" aria-labelledby="entryModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="entryModalLabel">NAME</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <b>URL:</b> URL
+                    </p>
+                    <p>
+                        <b>Login:</b> LOGIN
+                    </p>
+                    <p>
+                        <b>Secret:</b> SECRET
+                    </p>
+                    <p>
+                        <b>Description: </b> DESCRIPTION
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block extrascripts %}
@@ -67,6 +98,17 @@
                 dataType:   'json',
                 success:    function(data) {
                     $("#entryList").html(data.entry_list);
+                }
+            });
+        }
+        function showEntry(pk) {
+            $.ajax({
+                url:        '/ajax/entry/' + pk,
+                type:       'get',
+                dataType:   'json',
+                success:    function(data) {
+                    $("#entryModal").html(data.entry);
+                    $("#entryModal").modal('show');
                 }
             });
         }
