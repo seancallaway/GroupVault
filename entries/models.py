@@ -32,6 +32,9 @@ class Entry(models.Model):
     _iv = models.BinaryField(max_length=16, default=generate_iv_value)
     _secret = models.BinaryField(max_length=MAX_SECRET_LENGTH+BLOCK_SIZE, blank=True)
 
+    class Meta:
+        verbose_name_plural = 'entries'
+
     def __str__(self):
         return self.name
 
