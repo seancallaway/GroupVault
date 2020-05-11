@@ -112,5 +112,23 @@
                 }
             });
         }
+        function addEntry(folderPK) {
+            var serializedData = $("#newEntryForm").serialize();
+            $.ajax({
+                type: 'POST',
+                url: '/ajax/folder/' + folderPK,
+                data: serializedData,
+                dataType: 'json',
+            })
+            .done(function (response) {
+                if (response.form_is_valid) {
+                    $("#newEntryModal").modal('toggle');
+                    $('.modal-backdrop').hide();
+                    loadEntries(response.folder_id);
+                } else {
+                    $("#newEntryModal .modal-content").html(response.html_form);
+                }
+            });
+        }
     </script>
 {% endblock %}

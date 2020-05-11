@@ -1,3 +1,9 @@
+<div class="mb-1">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newEntryModal">
+        <i class="fas fa-plus"></i>
+    </button>
+</div>
+
 <div class="list-group">
     {% for entry in entries %}
         <a href="#" onClick="showEntry({{ entry.id }})" class="list-group-item list-group-item-action">{{ entry.name }}</a>
@@ -5,3 +11,15 @@
         <p class="list-group-item"><i>This folder is empty.</i></p>
     {% endfor %}
 </div>
+
+<div class="modal fade" id="newEntryModal" tabindex="-1" role="dialog" aria-labelledby="newEntryModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            {% include "ajax/new_entry_form.html" %}
+        </div>
+    </div>
+</div>
+
+<script>
+
+</script>
