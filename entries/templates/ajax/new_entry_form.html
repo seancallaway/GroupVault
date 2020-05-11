@@ -1,0 +1,48 @@
+<form id="newEntryForm">
+    <div class="modal-header">
+        <h5 class="modal-title" id="newEntryModalLabel">Create New Entry</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name"><b>Name:</b></label>
+            <input type="text" class="form-control" id="name" value="{% if form.name.value %}{{ form.name.value }}{% endif %}" name="name">
+            {% if form.name.errors %}
+                {% for error in form.name.errors %}
+                    <small class="text-danger">{{ error|escape }}</small>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label for="url"><b>URL:</b></label>
+            <input type="url" class="form-control" id="url" name="url" value="{% if form.url.value %}{{ form.url.value }}{% endif %}" aria-describedby="urlHelp">
+            <small id="urlHelp" class="form-text text-muted">Optional</small>
+        </div>
+        <div class="form-group">
+            <label for="login"><b>Login:</b></label>
+            <input type="text" class="form-control" id="login" name="login" value="{% if form.login.value %}{{ form.login.value }}{% endif %}" aria-describedby="loginHelp">
+            <small id="loginHelp" class="form-text text-muted">Optional</small>
+        </div>
+        <div class="form-group">
+            <label for="secret"><b>Secret:</b></label>
+            <input type="password" class="form-control" id="secret" name="secret">
+            {% if form.secret.errors %}
+                {% for error in form.secret.errors %}
+                    <small class="text-danger">{{ error|escape }}</small>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label for="desc"><b>Description:</b></label>
+            <textarea class="form-control" id="desc" name="description" rows="3" aria-describedby="descHelp">{% if form.description.value %}{{ form.description.value }}{% endif %}</textarea>
+            <small id="descHelp" class="form-text text-muted">Optional</small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" id="entrySubmitButton" onClick="addEntry({{ folder.id }})" class="btn btn-primary">Add</button>
+    </div>
+</form>
