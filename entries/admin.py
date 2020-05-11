@@ -7,6 +7,7 @@ class EntryAdmin(admin.ModelAdmin):
     form = EntryAdminChangeForm
     model = Entry
     list_display = ['name', 'folder', ]
+    list_filter = ('folder__name', )
 
 
 class FolderAdmin(admin.ModelAdmin):
