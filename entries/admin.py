@@ -9,7 +9,7 @@ class EntryAdmin(admin.ModelAdmin):
     list_filter = ('folder__name', )
 
     def get_form(self, request, obj=None, change=False, **kwargs):
-        if change:
+        if obj:
             kwargs['form'] = EntryAdminChangeForm
         else:
             kwargs['form'] = EntryAdminAddForm
