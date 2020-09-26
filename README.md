@@ -38,7 +38,7 @@ Distributed under the GNU GPL version 3. See ``LICENSE`` for more information.
 
 ## Contributing
 
-Contributions are welcome!
+Contributions are welcome! Please see [CONTRIBUTING](CONTRIBUTING.md) for more details.
 
 1. Fork it (<https://github.com/seancallaway/GroupVault/fork>)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
