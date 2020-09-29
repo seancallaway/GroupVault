@@ -14,7 +14,7 @@ labels: enhancement
 
     `Insert release version or Git SHA here`
 
-* Ansible version information:
+* Python version information:
 
     `python3 --version`
     <!-- Replace the command with its output above -->
